@@ -1,0 +1,14 @@
+conan profile detect --force
+
+# 2. Install dependencies
+conan install . --output-folder=build --build=missing
+
+# 3. Configure with CMake
+cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=build/conan_toolchain.cmake
+
+# 4. Build
+cmake --build build
+
+# 5. Run test
+cd build
+ctest
